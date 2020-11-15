@@ -1,0 +1,15 @@
+<%= @cocktail.name %>
+<br>
+<%if @cocktail.doses.empty?  %>
+  <%= "Your ingredients have not been added yet!" %>
+  <br>
+  <%= link_to "Make your cocktail here!", new_cocktail_dose_path(@cocktail) %>
+<% else %>
+  <% @cocktail.doses.each do |dose| %>
+    <p><%= dose.description %> of <%= dose.ingredient.name %> | <%= link_to "Remove", dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %></p>
+  <% end %>
+  <%= link_to "+ Add more ingredients", new_cocktail_dose_path(@cocktail) %>
+<% end %>
+<br>
+
+<%= link_to "All done?", cocktails_path %>
